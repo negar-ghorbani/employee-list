@@ -3,7 +3,7 @@
     <div class="employee_list">
       <ul>
         <li v-for="employee in employees" :key="employee.id">
-          <img :src="employee.avatar" :alt="employee.first_name" class="employee_img"/>
+          <img :src="employee.avatar" :alt="employee.first_name" class="employee_img" />
           <div>
             <p class="employee_name">{{ employee.first_name }} {{ employee.last_name }}</p>
             <a :href="'mailto:' + employee.email" class="employee_contact">Contact</a>
@@ -13,7 +13,8 @@
     </div>
     <div class="pagination">
       <button v-for="page in totalPages" :key="page" @click="goToPage(page)">
-        {{ page }}
+        <div v-if="this.currentPage === page" class="active"> {{ page }} </div>
+        <div v-else> {{ page }}</div>
       </button>
     </div>
   </div>
@@ -72,6 +73,7 @@ export default {
 .employee_list li {
   width: 15%;
   max-width: 160px;
+  min-height: 250px;
   margin: 10px;
   background-color: #F2F1F2;
   border-radius: 5%;
@@ -93,22 +95,29 @@ export default {
 }
 
 .employee_name {
-  font-size: large;
   font-weight: bold;
 }
 
 .pagination button {
   background-color: white;
-  border: 1px solid rgb(171, 171, 171);
+  border: 1px solid #595959;
   border-radius: 10%;
   margin: 5px;
+  color: black;
+  padding: 0;
 }
 
 .pagination button:hover {
-  background-color: rgb(149, 149, 149);
+  background-color: #595959;
+  color: white;
 }
 
-.pagination button:focus {
-  color: blue;
+.pagination .active {
+  background-color: #595959;
+  color: white;
+}
+
+.pagination button div {
+  padding: 5px 10px;
 }
 </style>
